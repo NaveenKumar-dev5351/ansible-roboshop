@@ -38,7 +38,7 @@
   
   - name: install dependencies
     community.general.npm:
-    path: /app
+      path: /app
 
   - name: copy catalogue service to system directory
     ansible.builtin.copy:
@@ -70,7 +70,7 @@
       file: "/app/db/master-data.js"
       idempotent: yes
       login_host: mongodb.devops4.store
-      
+
 
     
    
