@@ -66,16 +66,17 @@
       state: present
 
   - name: check if 'catalogue' database exists
-    ansible.builtin.command:
+    ansible.builtin.command: >
       mongosh --host mongodb.devops84.store --quiet --eval "db.adminCommand('listDatabases').databases.map(db => db.name).includes('catalogue')"
     register: catalogue_output
 
   - name: print catalogue output 
     ansible.builtin.debug:
-      msg: "{{ catalogue_output }}" 
+      msg: "{{ catalogue_output.stdout }}"
 
   - name: load products
-    ansible.builtin.shell: mongosh --host mongodb.devops84.store </app/db/master-data.js
-    when: catalogue_output.stdout | int < 0
+    ansible.builtin.shell: mongosh --host mongodb.devops84.store < /app/db/master-data.js
+    when: catalogue_output.stdout == "false"
+
     
    
