@@ -1,4 +1,4 @@
-- name: frontend confihuration
+- name: frontend configuration
   hosts: frontend
   become: yes
   tasks: 
@@ -30,7 +30,7 @@
       state: directory
 
   - name: download frontend code
-    ansible.builtin.grt_url:
+    ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
       dest: /tmp/frontend.zip
 
@@ -53,6 +53,6 @@
   - name: restart nginx
     ansible.builtin.service:
       name: nginx
-      state: started
+      state: restarted
 
   
