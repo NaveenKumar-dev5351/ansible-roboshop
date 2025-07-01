@@ -70,6 +70,10 @@
       mongosh --host mongodb.devops84.store --quiet --eval "db.adminCommand('listDatabases').databases.map(db => db.name).includes('catalogue')"
     register: catalogue_output
 
+  - name: Debug actual catalogue_output
+    ansible.builtin.debug:
+      var: catalogue_output
+
   - name: print catalogue output 
     ansible.builtin.debug:
       msg: "{{ catalogue_output.stdout }}"
